@@ -13,9 +13,12 @@ describe 'user can edit an article' do
 
         click_link 'Edit Article'
 
-        fill_in article[title], with: 'Edited Title'
-        fill_in article[body], with: 'Edited Body'
-        click_link 'Update Article'
+        expect(current_path).to eq(edit_article_path(article_1))
+
+        fill_in "article[title]", with: 'Edited Title'
+        fill_in "article[body]", with: 'Edited Body'
+
+        click_button 'Update Article'
 
         expect(current_path).to eq(article_path(article_1))
         expect(page).to have_content("Edited Title")
