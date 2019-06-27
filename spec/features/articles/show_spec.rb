@@ -14,6 +14,7 @@ describe 'user sees one article' do
     end
 
     it 'displays info for one article' do
+      save_and_open_page
       expect(current_path).to eq(article_path(@article_1))
       expect(page).to have_content(@article_1.title)
       expect(page).to have_content(@article_1.body)
