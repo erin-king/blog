@@ -34,4 +34,21 @@ describe 'user sees one article' do
       expect(page).to_not have_content(@article_1.title)
     end
   end
+
+  describe 'they fill in a comment form' do
+    it 'displays the comment on the article show' do
+      article = Article.create!(title: "The Best Article", body: "Article's very good body.")
+
+      visit article_path(article)
+
+      fill_in "comment[author_name]", with: "The Author"
+      fill_in "comment[body]", with: "The body."
+      click_on "Submit"
+
+      expect(current_path).to eq(article_path(article))
+      expect(page).to have_content("Post a Comment")
+      expect(page).to have_content("The Author")
+      expect(page).to have_content("The body.")
+    end
+  end
 end
